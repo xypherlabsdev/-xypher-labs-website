@@ -48,16 +48,18 @@ One-time setup:
 
 1. Push this folder to a public GitHub repo (Pages on private repos needs a paid plan).
 2. Repo → Settings → Pages → Source: **GitHub Actions**.
-3. Settings → Pages → Custom domain: enter the domain, then tick **Enforce HTTPS** once the certificate is ready.
-4. At the domain registrar, point DNS at GitHub:
-   - apex (`@`): A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - `www`: CNAME to `<github-username>.github.io`
+3. Settings → Pages → Custom domain: `xypherlabs.dev`, then tick **Enforce HTTPS** once the certificate is ready.
+4. DNS lives on Cloudflare. Add these records with the proxy **off** (grey cloud, "DNS only"), otherwise GitHub
+   cannot issue the HTTPS certificate:
+   - `xypherlabs.dev` (`@`): A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - `www`: CNAME to `xypherlabsdev.github.io`
 5. Optional but recommended: verify the domain under GitHub → Settings (account) → Pages, so no one else can
    use it on GitHub.
 
 Asset paths start at `/`, so the site only works at the root of the custom domain, not at
-`<user>.github.io/<repo>/`. Once the domain is live, change `og:image` in `index.html` to the absolute URL
-(`https://your-domain/og.png`) so link previews show the image.
+`<user>.github.io/<repo>/`. `.dev` domains are HTTPS-only in every browser, so the site shows a connection
+error until GitHub has issued the certificate (usually under an hour after DNS resolves). The canonical and
+`og:` URLs in `index.html` point at `https://xypherlabs.dev/`; change them if the domain ever changes.
 
 GitHub pauses scheduled workflows in public repos after 60 days with no commits and emails you; re-enable it
 from the Actions tab, or push any change.
