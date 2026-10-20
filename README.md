@@ -56,8 +56,8 @@ One-time setup:
 5. Optional but recommended: verify the domain under GitHub → Settings (account) → Pages, so no one else can
    use it on GitHub.
 
-Asset paths start at `/`, so the site only works at the root of the custom domain, not at
-`<user>.github.io/<repo>/`. `.dev` domains are HTTPS-only in every browser, so the site shows a connection
+Asset paths are relative (`base: './'` in `vite.config.ts`, `apps/...` in `src/data/site.ts`), so the site works
+both at the root of the custom domain and at `<user>.github.io/<repo>/`. Keep new asset paths relative too. `.dev` domains are HTTPS-only in every browser, so the site shows a connection
 error until GitHub has issued the certificate (usually under an hour after DNS resolves). The canonical and
 `og:` URLs in `index.html` point at `https://xypherlabs.dev/`; change them if the domain ever changes.
 
