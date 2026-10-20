@@ -1,0 +1,274 @@
+.apps {
+  background: var(--paper);
+  padding-top: clamp(96px, 13vw, 180px);
+}
+
+.apps__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 28px 48px;
+  margin-bottom: clamp(8px, 2vw, 24px);
+}
+
+.apps__title {
+  margin-top: 18px;
+  font-size: clamp(42px, 6.4vw, 108px);
+}
+
+.apps__intro {
+  justify-self: end;
+  max-width: 25em;
+  color: var(--mist);
+  font-size: clamp(16px, 1.25vw, 18.5px);
+}
+
+/* Cards pin one after another and the earlier ones shrink back into a stack. */
+.stack__item {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-card {
+  position: relative;
+  top: calc(-4vh + var(--i) * 22px);
+  width: min(1280px, calc(100% - 2 * var(--gutter)));
+  height: min(680px, 78vh);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  border-radius: clamp(24px, 2.6vw, 36px);
+  background: var(--app-bg);
+  color: #fff;
+  overflow: hidden;
+  transform-origin: 50% 0;
+  box-shadow:
+    0 40px 90px -50px rgba(11, 15, 26, 0.8),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+}
+
+.app-card__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 70% at 78% 40%, color-mix(in srgb, var(--app-accent) 32%, transparent), transparent 70%),
+    radial-gradient(40% 50% at 0% 100%, color-mix(in srgb, var(--app-accent) 14%, transparent), transparent 70%);
+}
+
+.app-card__dim {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  pointer-events: none;
+}
+
+.app-card__info {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: clamp(28px, 4vw, 60px);
+  min-width: 0;
+}
+
+.app-card__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.app-card__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+}
+
+.app-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.chip--accent {
+  border-color: transparent;
+  background: var(--app-accent);
+  color: #070a12;
+  font-weight: 600;
+}
+
+.app-card__name {
+  margin-top: 8px;
+  font-size: clamp(36px, 4.6vw, 76px);
+}
+
+.app-card__tagline {
+  font-size: clamp(18px, 1.7vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--app-accent);
+}
+
+.app-card__desc {
+  max-width: 31em;
+  font-size: clamp(15px, 1.12vw, 16.5px);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.app-card__features {
+  display: grid;
+  gap: 8px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.app-card__features li {
+  display: flex;
+  gap: 10px;
+}
+
+.app-card__features li::before {
+  content: '›';
+  font-family: var(--font-mono);
+  color: var(--app-accent);
+}
+
+.btn--app {
+  margin-top: auto;
+  background: #fff;
+  color: #070a12;
+}
+
+.btn--app:hover {
+  background: var(--app-accent);
+}
+
+/* Three Play Store graphics fanned out like cards; hovering the card spreads them. */
+.app-card__shots {
+  position: relative;
+  z-index: 1;
+  display: block;
+  min-width: 0;
+}
+
+.shot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(44%, 250px);
+  height: auto;
+  aspect-ratio: 600 / 1067;
+  border-radius: clamp(14px, 1.6vw, 22px);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.65);
+  transform: translate(-50%, -50%) translateX(var(--tx)) translateY(var(--ty, 0)) rotate(var(--r)) scale(var(--s, 1));
+  transition: transform 0.9s var(--ease-out);
+}
+
+.shot--0 {
+  --tx: -52%;
+  --ty: 4%;
+  --r: -9deg;
+  --s: 0.92;
+}
+
+.shot--1 {
+  --tx: 0%;
+  --r: 0deg;
+  z-index: 2;
+}
+
+.shot--2 {
+  --tx: 52%;
+  --ty: 4%;
+  --r: 9deg;
+  --s: 0.92;
+}
+
+.app-card:hover .shot--0 {
+  --tx: -74%;
+  --r: -13deg;
+}
+
+.app-card:hover .shot--1 {
+  --ty: -3%;
+  --s: 1.04;
+}
+
+.app-card:hover .shot--2 {
+  --tx: 74%;
+  --r: 13deg;
+}
+
+@media (max-width: 900px) {
+  .apps__head {
+    grid-template-columns: 1fr;
+  }
+
+  .apps__intro {
+    justify-self: start;
+  }
+
+  .app-card {
+    top: calc(2vh + var(--i) * 12px);
+    height: calc(100svh - 120px);
+    max-height: 760px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .app-card__info {
+    gap: 10px;
+    padding: 24px 22px 8px;
+  }
+
+  .app-card__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+  }
+
+  .app-card__name {
+    margin-top: 2px;
+  }
+
+  .app-card__desc,
+  .app-card__features {
+    display: none;
+  }
+
+  .btn--app {
+    margin-top: 6px;
+    height: 46px;
+    padding: 0 18px;
+    font-size: 14.5px;
+  }
+
+  .shot {
+    width: min(38%, 190px);
+  }
+}
+
+@media (max-width: 900px) and (min-height: 760px) {
+  .app-card__desc {
+    display: block;
+    font-size: 14.5px;
+  }
+}

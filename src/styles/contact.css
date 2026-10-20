@@ -1,0 +1,75 @@
+.contact {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(80% 90% at 85% 10%, #3a6bff 0%, rgba(36, 87, 255, 0) 60%),
+    var(--cobalt);
+  color: var(--paper);
+  padding-block: clamp(110px, 14vw, 200px);
+}
+
+.contact__floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.floater {
+  position: absolute;
+}
+
+.floater path {
+  fill: none;
+  stroke: rgba(248, 250, 252, 0.26);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+}
+
+.contact__inner {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 24px;
+}
+
+.contact__title {
+  font-size: clamp(42px, 7.2vw, 124px);
+}
+
+.contact__decode {
+  display: inline-block;
+  color: var(--ink);
+}
+
+.contact__text {
+  max-width: 30em;
+  font-size: clamp(16px, 1.3vw, 19px);
+  color: rgba(248, 250, 252, 0.85);
+}
+
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 760px) {
+  .floater:nth-child(n + 2) {
+    display: none;
+  }
+
+  .floater:first-child {
+    left: 58% !important;
+    top: 4% !important;
+    width: 150px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .contact__actions .btn--xl {
+    height: 56px;
+    padding: 0 22px;
+    font-size: 15px;
+  }
+}

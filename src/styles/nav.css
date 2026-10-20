@@ -1,0 +1,223 @@
+.nav {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 14px);
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  padding-left: max(calc(var(--gutter) - 12px), 10px, env(safe-area-inset-left, 0px));
+  padding-right: max(calc(var(--gutter) - 12px), 10px, env(safe-area-inset-right, 0px));
+  pointer-events: none;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.nav.is-hidden {
+  transform: translateY(calc(-100% - 30px));
+}
+
+.nav__bar {
+  pointer-events: auto;
+  width: 100%;
+  max-width: calc(var(--maxw) - 2 * var(--gutter) + 24px);
+  height: 62px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 8px 0 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: var(--paper);
+  transition:
+    background-color 0.5s var(--ease-out),
+    border-color 0.5s var(--ease-out),
+    color 0.5s var(--ease-out),
+    box-shadow 0.5s var(--ease-out);
+}
+
+.nav.is-solid .nav__bar {
+  background: rgba(248, 250, 252, 0.8);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  backdrop-filter: blur(16px) saturate(1.6);
+  border-color: rgba(11, 15, 26, 0.08);
+  color: var(--ink);
+  box-shadow: 0 14px 40px -24px rgba(11, 15, 26, 0.45);
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 108%;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.nav__labs {
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.nav__mark {
+  transition: transform 0.6s var(--ease-out);
+}
+
+.nav__brand:hover .nav__mark {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.nav__links {
+  display: flex;
+  gap: 2px;
+}
+
+.nav__link {
+  position: relative;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.nav__link::before {
+  content: '›';
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  translate: -4px -52%;
+  opacity: 0;
+  color: currentColor;
+  transition:
+    opacity 0.3s,
+    translate 0.4s var(--ease-out);
+}
+
+.nav__link:hover::before {
+  opacity: 0.6;
+  translate: 0 -52%;
+}
+
+.nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 46px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  font-weight: 600;
+  background: var(--paper);
+  color: var(--cobalt);
+  transition:
+    background-color 0.4s,
+    color 0.4s;
+}
+
+.nav.is-solid .nav__cta {
+  background: var(--cobalt);
+  color: var(--paper);
+}
+
+.nav.is-solid .nav__cta:hover {
+  background: var(--cobalt-deep);
+}
+
+.nav__burger {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.nav__burger span {
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    transform 0.5s var(--ease-out),
+    top 0.5s var(--ease-out);
+}
+
+.nav__burger span:first-child {
+  top: 18px;
+}
+
+.nav__burger span:last-child {
+  top: 26px;
+}
+
+.nav.is-open .nav__burger span:first-child {
+  top: 22px;
+  transform: rotate(45deg);
+}
+
+.nav.is-open .nav__burger span:last-child {
+  top: 22px;
+  transform: rotate(-45deg);
+}
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 120px);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 32px);
+}
+
+.menu__links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu__link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: clamp(44px, 13vw, 84px);
+}
+
+.menu__chev {
+  color: var(--cobalt);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.6em;
+}
+
+.menu__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--mist-dark);
+}
+
+@media (max-width: 880px) {
+  .nav__links,
+  .nav__cta {
+    display: none;
+  }
+
+  .nav__burger {
+    display: block;
+  }
+
+  .nav__bar {
+    height: 58px;
+  }
+}

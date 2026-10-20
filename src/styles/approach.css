@@ -1,0 +1,151 @@
+/* Scroll drives the three logo pieces into place, one principle each. */
+.approach {
+  position: relative;
+  height: 330vh;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.approach__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 96px);
+}
+
+.approach__visual {
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+}
+
+.approach__x {
+  width: 100%;
+  max-width: 560px;
+  overflow: visible;
+}
+
+.piece {
+  fill: transparent;
+  stroke: rgba(248, 250, 252, 0.28);
+  stroke-width: 0.6;
+  transition:
+    fill 0.6s var(--ease-out),
+    stroke 0.6s var(--ease-out);
+}
+
+.piece.is-active {
+  fill: var(--cobalt);
+  stroke: var(--cobalt);
+}
+
+.piece.is-placed {
+  fill: var(--paper);
+  stroke: var(--paper);
+}
+
+.approach__x.is-done .piece {
+  fill: var(--cobalt);
+  stroke: var(--cobalt);
+  filter: drop-shadow(0 0 24px rgba(36, 87, 255, 0.55));
+}
+
+.approach__caption {
+  color: var(--mist-dark);
+  min-height: 1.6em;
+}
+
+.approach__caption::before {
+  color: var(--cobalt-soft);
+}
+
+.approach__copy {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.approach__copy .eyebrow {
+  color: var(--mist-dark);
+}
+
+.approach__copy .eyebrow::before {
+  color: var(--cobalt-soft);
+}
+
+.approach__title {
+  font-size: clamp(34px, 3.8vw, 62px);
+  margin-bottom: clamp(8px, 2vh, 24px);
+}
+
+.approach__list {
+  display: grid;
+  gap: clamp(16px, 3vh, 30px);
+}
+
+.principle {
+  display: grid;
+  gap: 8px;
+  padding-left: 22px;
+  border-left: 2px solid var(--line-dark);
+  opacity: 0.32;
+  transition:
+    opacity 0.6s var(--ease-out),
+    border-color 0.6s var(--ease-out);
+}
+
+.principle.is-active {
+  opacity: 1;
+  border-color: var(--cobalt);
+}
+
+.principle.is-past {
+  opacity: 0.55;
+}
+
+.principle__title {
+  font-size: clamp(24px, 2.4vw, 38px);
+  font-stretch: 105%;
+}
+
+.principle__body {
+  max-width: 32em;
+  color: rgba(248, 250, 252, 0.72);
+  font-size: clamp(15px, 1.1vw, 17px);
+}
+
+@media (max-width: 900px) {
+  .approach__sticky {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    align-content: center;
+    gap: 20px;
+    padding-top: 76px;
+  }
+
+  .approach__visual {
+    order: 2;
+    gap: 8px;
+  }
+
+  .approach__x {
+    max-width: 260px;
+  }
+
+  .approach__title {
+    font-size: clamp(30px, 8vw, 44px);
+    margin-bottom: 0;
+  }
+
+  .principle {
+    display: none;
+  }
+
+  .principle.is-active {
+    display: grid;
+  }
+}

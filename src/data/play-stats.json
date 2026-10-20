@@ -1,0 +1,21 @@
+{
+  "updated": "2026-10-20",
+  "apps": {
+    "autotally": {
+      "label": "100+",
+      "min": 100
+    },
+    "applock": {
+      "label": "1K+",
+      "min": 1000
+    },
+    "sipience": {
+      "label": "50+",
+      "min": 50
+    },
+    "qrscan": {
+      "label": "10+",
+      "min": 10
+    }
+  }
+}

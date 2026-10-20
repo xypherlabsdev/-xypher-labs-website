@@ -1,0 +1,308 @@
+/* The hero is the app icon blown up to full screen. Scrolling folds it back into the tile. */
+.hero {
+  position: relative;
+  height: 250vh;
+  background: var(--paper);
+}
+
+.hero__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.hero__panel {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    radial-gradient(120% 90% at 72% 40%, #3a6bff 0%, rgba(36, 87, 255, 0) 60%),
+    var(--cobalt);
+  color: var(--paper);
+  will-change: clip-path;
+}
+
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(248, 250, 252, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(248, 250, 252, 0.08) 1px, transparent 1px);
+  background-size: 76px 76px;
+  background-position: center;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 70% 45%, #000 15%, transparent 72%);
+  mask-image: radial-gradient(ellipse 70% 70% at 70% 45%, #000 15%, transparent 72%);
+}
+
+.hero__canvas {
+  position: absolute !important;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero__flat {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: var(--paper);
+  filter: drop-shadow(0 24px 40px rgba(10, 27, 102, 0.35));
+}
+
+.hero__content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 64px;
+  pointer-events: none;
+}
+
+.hero__content > * {
+  pointer-events: auto;
+}
+
+.hero__eyebrow {
+  color: rgba(248, 250, 252, 0.8);
+}
+
+.hero__eyebrow::before {
+  color: var(--paper);
+}
+
+.hero__title {
+  margin: 20px 0 26px;
+  font-size: clamp(56px, 8.4vw, 150px);
+  max-width: 9ch;
+}
+
+.hero__decoded {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.hero__caret {
+  display: inline-block;
+  width: 0.38em;
+  height: 0.085em;
+  margin-left: 0.08em;
+  background: var(--paper);
+  animation: caret 1.05s steps(1) infinite;
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero__sub {
+  max-width: 31em;
+  font-size: clamp(16.5px, 1.3vw, 19.5px);
+  line-height: 1.55;
+  color: rgba(248, 250, 252, 0.84);
+}
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.hero__meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 26px);
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(248, 250, 252, 0.72);
+}
+
+.hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+}
+
+.hero__facts li::before {
+  content: '/';
+  margin-right: 10px;
+  opacity: 0.5;
+}
+
+.hero__scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero__scroll-chevron {
+  display: inline-block;
+  font-size: 18px;
+  rotate: 90deg;
+  animation: nudge 1.6s var(--ease-out) infinite;
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    translate: 0 -3px;
+  }
+  50% {
+    translate: 0 4px;
+  }
+}
+
+/* What appears around the tile once the hero has folded away */
+.manifesto {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  color: var(--ink);
+}
+
+.manifesto__label {
+  position: absolute;
+  left: 50%;
+  bottom: calc(50% + var(--icon) / 2 + 30px);
+  translate: -50% 0;
+}
+
+.manifesto__side {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  font-size: clamp(30px, 4.2vw, 68px);
+  white-space: nowrap;
+}
+
+.manifesto__side--left {
+  right: calc(50% + var(--icon) / 2 + clamp(24px, 3vw, 48px));
+}
+
+.manifesto__side--right {
+  left: calc(50% + var(--icon) / 2 + clamp(24px, 3vw, 48px));
+}
+
+.manifesto__below {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + var(--icon) / 2 + 30px);
+  translate: -50% 0;
+  width: min(36em, calc(100% - 2 * var(--gutter)));
+  text-align: center;
+  display: grid;
+  gap: 14px;
+}
+
+.manifesto__big {
+  font-size: clamp(30px, 4.2vw, 68px);
+  color: var(--cobalt);
+}
+
+.manifesto__text {
+  color: var(--mist);
+  font-size: clamp(15px, 1.15vw, 17.5px);
+}
+
+@media (max-width: 760px), (orientation: portrait) and (max-width: 1100px) {
+  .hero__content {
+    justify-content: flex-start;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 108px);
+  }
+
+  .hero__title {
+    margin: 16px 0 18px;
+    font-size: clamp(50px, 15.5vw, 84px);
+  }
+
+  .hero__ctas {
+    margin-top: 24px;
+  }
+
+  .hero__ctas .btn {
+    height: 50px;
+    padding: 0 20px;
+  }
+
+  .hero__facts {
+    display: none;
+  }
+
+  .hero__meta {
+    justify-content: center;
+  }
+
+  .manifesto__label {
+    bottom: calc(50% + var(--icon) / 2 + 92px);
+  }
+
+  .manifesto__side {
+    font-size: clamp(28px, 9vw, 40px);
+    translate: -50% 0;
+    left: 50%;
+    right: auto;
+    top: auto;
+  }
+
+  .manifesto__side--left {
+    bottom: calc(50% + var(--icon) / 2 + 48px);
+  }
+
+  .manifesto__side--right {
+    bottom: calc(50% + var(--icon) / 2 + 12px);
+  }
+
+  .manifesto__below {
+    top: calc(50% + var(--icon) / 2 + 22px);
+  }
+
+  .manifesto__big {
+    font-size: clamp(28px, 9vw, 40px);
+  }
+}
+
+@media (orientation: portrait) and (max-height: 700px) {
+  .hero__content {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 92px);
+  }
+
+  .hero__title {
+    margin: 12px 0 14px;
+  }
+
+  .hero__sub {
+    font-size: 15px;
+  }
+
+  .hero__ctas {
+    margin-top: 18px;
+    gap: 8px;
+  }
+
+  .hero__ctas .btn {
+    height: 46px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+  .hero__meta {
+    display: none;
+  }
+}
+
+@media (max-height: 640px) and (min-width: 761px) {
+  .hero__title {
+    font-size: clamp(48px, 12vh, 110px);
+  }
+}
